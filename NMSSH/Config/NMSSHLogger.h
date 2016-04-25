@@ -45,6 +45,7 @@ typedef NS_OPTIONS(NSUInteger, NMSSHLogLevel) {
 
 /** Enable or disable the logging feature */
 @property (nonatomic, assign, getter = isEnabled) BOOL enabled;
+@property (nonatomic, strong) NSMutableString *lastLogs;
 
 /// ----------------------------------------------------------------------------
 /// @name Logging

@@ -24,6 +24,14 @@ typedef NS_OPTIONS(NSUInteger, NMSSHLogFlag) {
 
 @implementation NMSSHLogger
 
+- (NSMutableString *)lastLogs
+{
+    if (!_lastLogs) {
+        _lastLogs = [[NSMutableString alloc] init];
+    }
+    return _lastLogs;
+}
+
 // -----------------------------------------------------------------------------
 #pragma mark - INITIALIZE THE LOGGER INSTANCE
 // -----------------------------------------------------------------------------
@@ -38,6 +46,7 @@ typedef NS_OPTIONS(NSUInteger, NMSSHLogFlag) {
         [logger setLogLevel:NMSSHLogLevelVerbose];
         [logger setLogBlock:^(NMSSHLogLevel level, NSString *format) {
             NSLog(@"%@", format);
+            [logger.lastLogs appendString:format];
         }];
         [logger setLoggerQueue:dispatch_queue_create("NMSSH.loggerQueue", DISPATCH_QUEUE_SERIAL)];
     });
