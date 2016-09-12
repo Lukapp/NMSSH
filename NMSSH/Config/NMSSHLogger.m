@@ -47,6 +47,7 @@ typedef NS_OPTIONS(NSUInteger, NMSSHLogFlag) {
         [logger setLogBlock:^(NMSSHLogLevel level, NSString *format) {
             NSLog(@"%@", format);
             [logger.lastLogs appendString:format];
+            [logger.lastLogs appendString:@"\n"];
         }];
         [logger setLoggerQueue:dispatch_queue_create("NMSSH.loggerQueue", DISPATCH_QUEUE_SERIAL)];
     });
